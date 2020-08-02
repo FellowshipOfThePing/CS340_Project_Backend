@@ -1,14 +1,18 @@
 // Require Modules
 const express = require("express");
-const path = require("path");
-const bodyParser = require("body-parser");
+const cors = require("cors");
+const helmet = require('helmet');
 const mysql = require("./dbcon.js");
 
 // Set up Express App
 const app = express();
-app.set("port", 8420);
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+const port = process.env.PORT || 5000;
+
+// Middleware
+app.use(express.static(__dirname + '/static', { dotfiles: 'allow' } ))
+app.use(cors());
+app.use(express.json());
+app.use(helmet());
 
 // ---- Queries Organized by Page on Frontend---- //
 
@@ -353,11 +357,7 @@ app.use((err, req, res, next) => {
   res.send("500 - Server Error");
 });
 
-// Listen on Port
-app.listen(app.get("port"), () => {
-  console.log(
-    "Express started on http://localhost:" +
-      app.get("port") +
-      "; press Ctrl-C to terminate."
-  );
+// Start Express Server
+app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
 });
