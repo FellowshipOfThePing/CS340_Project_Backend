@@ -1,18 +1,16 @@
 // Require Modules
 const express = require("express");
 const cors = require("cors");
-const helmet = require('helmet');
 const mysql = require("./dbcon.js");
 
 // Set up Express App
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8429;
 
 // Middleware
 app.use(express.static(__dirname + '/static', { dotfiles: 'allow' } ))
 app.use(cors());
 app.use(express.json());
-app.use(helmet());
 
 // ---- Queries Organized by Page on Frontend---- //
 
