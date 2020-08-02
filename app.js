@@ -5,7 +5,7 @@ const mysql = require("./dbcon.js");
 
 // Set up Express App
 const app = express();
-const port = process.env.PORT || 8429;
+const port = process.env.PORT || 8000;
 
 // Middleware
 app.use(express.static(__dirname + '/static', { dotfiles: 'allow' } ))
@@ -357,5 +357,5 @@ app.use((err, req, res, next) => {
 
 // Start Express Server
 app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
+  console.log("App is running on port " + port);
 });
