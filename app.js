@@ -142,7 +142,7 @@ app.get("/chains", (req, res, next) => {
 
 app.get("/chains/filter", (req, res, next) => {
   mysql.pool.query(
-    "SELECT * FROM restaurant_chain WHERE CONTAINS(chain_name, ?);",
+    "SELECT * FROM restaurant_chain WHERE chain_name LIKE CONCAT('%', ?, '%');",
     [req.query.chain_name],
     (err, result) => {
       if (err) {
