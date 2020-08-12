@@ -140,6 +140,20 @@ app.get("/chains", (req, res, next) => {
   );
 });
 
+app.delete("/chains/filter", (req, res, next) => {
+  mysql.pool.query(
+    "SELECT chain_name FROM restaurant_chain WHERE chain_name=?",
+    [req.query.chain_name],
+    (err, result) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.send(result);
+    }
+  );
+});
+
 app.post("/chains", (req, res, next) => {
   mysql.pool.query(
     "INSERT INTO restaurant_chain (chain_name) VALUES(?)",
